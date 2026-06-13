@@ -1,0 +1,11 @@
+groups:
+  - name: model_drift_alerts
+    rules:
+      - alert: ModelConfidenceDrift
+        expr: prediction_confidence_score < 0.59
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Model prediction confidence has dropped below threshold"
+          description: "prediction_confidence_score = {{ $value }}, below 0.59 for over 1 minute. Triggering rollback to stable fallback."

@@ -1,0 +1,20 @@
+global:
+  resolve_timeout: 1m
+
+route:
+  receiver: "jenkins-rollback-webhook"
+  group_by: ["alertname"]
+  group_wait: 10s
+  group_interval: 30s
+  repeat_interval: 5m
+
+receivers:
+  - name: "jenkins-rollback-webhook"
+    webhook_configs:
+      - url: "http://54.175.252.13:8080/generic-webhooktrigger/invoke?token=ROLLBACK_BAF692_TOKEN"
+        send_resolved: false
+        http_config:
+          basic_auth:
+            # Replace with your Jenkins username + API token
+            username: "Muhammad_Haseeb"
+            password: "YOUR_JENKINS_API_TOKEN"

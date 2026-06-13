@@ -1,0 +1,23 @@
+# Dockerfile.test - test runner image with pytest, requests, selenium and headless Chrome.
+# Selenium 4.21 ships "Selenium Manager" which auto-downloads a matching
+# chromedriver, so we only need to install the Chrome browser itself.
+
+FROM python:3.10-slim
+
+WORKDIR /app
+
+# Install Chrome dependencies + Google Chrome (stable)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wget gnupg unzip curl ca-certificates fonts-liberation \
+    libnss3 libxss1 libasound2 libatk-bridge2.0-0 libgtk-3-0 libgbm1 \
+    && wget -q -O /tmp/google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+    && apt-get install -y /tmp/google-chrome.deb \
+    && rm /tmp/google-chrome.deb \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY tests/ ./tests/
+
+CMD ["pytest", "-v"]

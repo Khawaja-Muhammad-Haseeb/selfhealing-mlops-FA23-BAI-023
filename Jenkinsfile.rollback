@@ -1,0 +1,22 @@
+// Pipeline job name: rollback-to-stable
+// Configure in Jenkins UI:
+//   Build Triggers -> Generic Webhook Trigger -> Token = YOUR_WEBHOOK_TOKEN
+// This Jenkinsfile only needs the single required stage below.
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Switch Traffic to Stable (Green)') {
+            steps {
+                sh '''
+                    kubectl patch service sentiment-api-service \
+                      -p '{"spec":{"selector":{"app":"sentiment-api","slot":"green"}}}'
+
+                    echo "Service sentiment-api-service now routes to slot: green"
+                    kubectl get service sentiment-api-service -o jsonpath='{.spec.selector}'
+                '''
+            }
+        }
+    }
+}
