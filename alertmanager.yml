@@ -11,7 +11,7 @@ route:
 receivers:
   - name: "jenkins-rollback-webhook"
     webhook_configs:
-      - url: "http://54.209.155.223:8080/generic-webhooktrigger/invoke?token=ROLLBACK_BAF692_TOKEN"
+      - url: "http://54.209.155.223:8080/generic-webhook-trigger/invoke?token=ROLLBACK_BAF692_TOKEN"
         send_resolved: false
         http_config:
           basic_auth:
