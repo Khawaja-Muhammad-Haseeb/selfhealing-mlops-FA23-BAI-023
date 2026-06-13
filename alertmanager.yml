@@ -17,4 +17,4 @@ receivers:
           basic_auth:
             # Replace with your Jenkins username + API token
             username: "Muhammad_Haseeb"
-            password: "YOUR_JENKINS_API_TOKEN"
+            password: '11d4f5d5287833cb5d39c008dc6b20356c'
