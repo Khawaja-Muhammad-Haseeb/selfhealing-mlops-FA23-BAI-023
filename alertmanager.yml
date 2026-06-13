@@ -11,10 +11,10 @@ route:
 receivers:
   - name: "jenkins-rollback-webhook"
     webhook_configs:
-      - url: "http://54.175.252.13:8080/generic-webhooktrigger/invoke?token=ROLLBACK_BAF692_TOKEN"
+      - url: "http://54.209.155.223:8080/generic-webhooktrigger/invoke?token=ROLLBACK_BAF692_TOKEN"
         send_resolved: false
         http_config:
           basic_auth:
             # Replace with your Jenkins username + API token
             username: "Muhammad_Haseeb"
-            password: '11d4f5d5287833cb5d39c008dc6b20356c'
+            password: '11bdf7627f398a75a0400e106cda3b87b5'
